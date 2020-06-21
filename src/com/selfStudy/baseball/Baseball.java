@@ -10,6 +10,10 @@ public class Baseball {
     public int strike;
     public int ball;
     public int cnt;
+    
+    int[] correct; // 정답
+    int[] myAnswer; // 내 답
+   
 
     // 중복 체크 메소드를 위한 i
     private int i;
@@ -41,16 +45,9 @@ public class Baseball {
         for(int j=0; j<i; j++) {
             if(nums[i] == nums[j]) {
                 this.i--;
-            }
-        }
-    }
-
-    // 내 답 입력 시 중복 체크하기(위 중복 체크 메소드 + 멘트)
-    public void sameNum2(int[] nums, int i) {
-        for(int j=0; j<i; j++) {
-            if(nums[i] == nums[j]) {
-                this.i--;
+                if(nums == myAnswer) {
                 System.out.println("중복입니다! 다시 입력해주세요.\n");
+                }
             }
         }
 
@@ -60,7 +57,7 @@ public class Baseball {
     // 랜덤 숫자 뽑기 ->정답 숫자 배열 return
     // 1에서 9까지
     public int[] randomNums(int LEN) {
-        int[] correct = new int[LEN];
+        correct = new int[LEN];
 
         i = 0;
         for(; i<LEN; i++) {
@@ -73,7 +70,12 @@ public class Baseball {
 
     // 정답 또는 내 답 보여주기(테스트용, 생략 가능)
     public void printNums(int[] nums) {
-        System.out.println("출력 : " + Arrays.toString(nums));
+    	if(nums == correct) {
+    		System.out.print("정답 출력 : ");
+    	} else {
+    		System.out.print("내 답 출력 : ");
+    	}
+        System.out.println(Arrays.toString(nums));
         System.out.println();
     }
 
@@ -82,9 +84,9 @@ public class Baseball {
     // 1에서 9까지만 입력 가능
     // 중복되는 숫자 입력 불가능
     public int[] myAnswers(int LEN) {
-        int[] myAnswer = new int[LEN];
+        myAnswer = new int[LEN];
         cnt++;
-        System.out.printf("<<%d번쨰 시도>>\n", cnt);
+        System.out.printf("<<%d번째 시도>>\n", cnt);
 
         i=0;
         for(; i<LEN; i++) {
@@ -93,7 +95,7 @@ public class Baseball {
 
             // 1~9까지만 가능
             if(myAnswer[i] > 0 && myAnswer[i] < 10) {
-                sameNum2(myAnswer, i); // 중복 체크 메소드2(기본 중복 체크 메소드에 멘트 추가)
+                sameNum(myAnswer, i); // 중복 체크 메소드
             } else {
                 System.out.println("1에서 9 사이의 숫자만 입력해주세요!\n");
                 i--; // 범위를 벗어나면 i번째 숫자를 다시 입력해야함
