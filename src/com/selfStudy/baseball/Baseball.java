@@ -7,14 +7,14 @@ public class Baseball {
     Scanner scanner = new Scanner(System.in);
 
     // 필드
-    public int strike;
-    public int ball;
-    public int cnt;
+    private int strike;
+    private int ball;
+    private int cnt;
     
     
-    final int LEN; // 맞힐 숫자 개수, 생성자 안에서 초기화됨 // 결과 출력, 종료 메소드에서 매개변수를 없애기 위해
-    int[] correct; // 정답
-    int[] myAnswer; // 내 답
+    private final int LEN; // 맞힐 숫자 개수, 생성자 안에서 초기화됨 // 결과 출력, 종료 메소드에서 매개변수를 없애기 위해
+    private int[] correct; // 정답
+    private int[] myAnswer; // 내 답
    
 
     // 중복 체크 메소드를 위한 i
@@ -22,7 +22,7 @@ public class Baseball {
 
     // 게임 시작과 종료를 위한 boolean 변수
     public boolean run;
-
+    
 
 
     // 생성자
@@ -49,7 +49,7 @@ public class Baseball {
 
 
     // 중복 체크하기
-    public void sameNum(int[] nums, int i) {
+    private void sameNum(int[] nums, int i) {
         for(int j=0; j<i; j++) {
             if(nums[i] == nums[j]) {
                 this.i--;
@@ -64,7 +64,7 @@ public class Baseball {
 
     // 랜덤 숫자 뽑기 ->정답 숫자 배열 return
     // 1에서 9까지
-    public int[] randomNums(int LEN) {
+    private int[] randomNums(int LEN) {
         correct = new int[LEN];
 
         i = 0;
@@ -77,7 +77,7 @@ public class Baseball {
 
 
     // 정답 또는 내 답 보여주기(테스트용, 생략 가능)
-    public void printNums(int[] nums) {
+    private void printNums(int[] nums) {
     	if(nums == correct) {
     		System.out.print("정답 출력 : ");
     	} else {
@@ -91,7 +91,7 @@ public class Baseball {
     // 답 입력
     // 1에서 9까지만 입력 가능
     // 중복되는 숫자 입력 불가능
-    public int[] myAnswers(int LEN) {
+    private int[] myAnswers(int LEN) {
         myAnswer = new int[LEN];
         cnt++;
         System.out.printf("<<%d번째 시도>>\n", cnt);
@@ -116,7 +116,7 @@ public class Baseball {
 
 
     // 스트라이크, 볼 판단
-    public void result(int[] correct, int[] myAnswer) {
+    private void result(int[] correct, int[] myAnswer) {
         strike = 0;
         ball = 0;
         for(int k=0; k<correct.length; k++) {
@@ -135,12 +135,13 @@ public class Baseball {
 
 
     // 결과 출력
-    public void printResult() {
+    private void printResult() {
         System.out.printf("%d스트라이크 %d볼 %d아웃\n\n", strike, ball, (LEN-strike-ball));
     }
+    
 
     // 게임 종료
-    public void finish() {
+    private void finish() {
         if(strike == LEN) {
             run = false;
             System.out.println("정답입니다!");
