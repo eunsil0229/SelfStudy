@@ -11,6 +11,8 @@ public class Baseball {
     public int ball;
     public int cnt;
     
+    
+    final int LEN; // 맞힐 숫자 개수, 생성자 안에서 초기화됨 // 결과 출력, 종료 메소드에서 매개변수를 없애기 위해
     int[] correct; // 정답
     int[] myAnswer; // 내 답
    
@@ -18,7 +20,7 @@ public class Baseball {
     // 중복 체크 메소드를 위한 i
     private int i;
 
-    // 게임 시작과 종료를 위한 boolean 변수 -> Game class에서 쓰임
+    // 게임 시작과 종료를 위한 boolean 변수
     public boolean run;
 
 
@@ -27,16 +29,22 @@ public class Baseball {
     public Baseball() {
         run = true;
         System.out.println("야구게임 시작!");
+        System.out.print("몇 개의 숫자를 맞히길 원하십니까? > ");
+        LEN = scanner.nextInt();
+        System.out.println();
     }
 
 
+    /*
+     * 생성자 안에다가 LEN 값 받기를 집어 넣음
     // 맞힐 숫자 개수(정답 배열의 길이)를 return
     public int numsLength() {
         System.out.print("몇 개의 숫자를 맞히길 원하십니까? > ");
-        final int NUM = scanner.nextInt();
+        final int LEN = scanner.nextInt();
         System.out.println();
-        return NUM;
+        return LEN;
     }
+    */
 
 
 
@@ -127,12 +135,12 @@ public class Baseball {
 
 
     // 결과 출력
-    public void printResult(int LEN) {
+    public void printResult() {
         System.out.printf("%d스트라이크 %d볼 %d아웃\n\n", strike, ball, (LEN-strike-ball));
     }
 
     // 게임 종료
-    public void finish(int LEN) {
+    public void finish() {
         if(strike == LEN) {
             run = false;
             System.out.println("정답입니다!");
@@ -144,15 +152,14 @@ public class Baseball {
     
     // 전체 게임 시작
     public void start() {
-           // 1. 숫자 몇 개 맞힐건지 정하기
-         int LEN = numsLength();
+         // 1. 숫자 몇 개 맞힐건지 정하기 -> 생성자에서 시작
 
          // 2. 랜덤숫자 뽑기
          int[] correct = randomNums(LEN);
 
 
          // 2-1. 정답 보여주기(테스트용, 생략 가능)
-         printNums(correct);
+         // printNums(correct);
 
 
 
@@ -162,18 +169,20 @@ public class Baseball {
 
 
             // 3-1. 내 답 보여주기(테스트용, 생략 가능)
-            printNums(myAnswer);
+            // printNums(myAnswer);
 
 
              // 4. 결과 판단
              result(correct, myAnswer);
 
              // 5. 결과 출력
-             printResult(LEN);
+             printResult();
 
              // 6. 종료
-             finish(LEN);
+             finish();
          }
-
     }
+    
+    
+    
 }
